@@ -48,7 +48,7 @@ d <- by(tmp, tmp["pop"],head,n=20)
 
 reduced_dat<-Reduce(rbind, d)
 
-pca <-ggplot(data=reduced_dat, aes(x=PC1,y=PC2, color=ancients, label=pop))  + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("coral", "darkgrey", "red", "purple3", "springgreen4", "chocolate4", "sienna"))  + guides(label=FALSE)
+pca <-ggplot(data=reduced_dat, aes(x=PC1,y=PC2, color=ancients, label=pop))  + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("coral", "darkgrey", "red", "purple3", "springgreen4", "chocolate4", "sienna"),name="Context", breaks=c("bronze_turkey","modern","neolithic_iran","neolithic_serbia","neolithic_turkey","paleolithic_turkey"),labels=c("Bronze Age Turkey","Modern","Neolithic Iran", "Neolithic Serbia", "Neolithic Turkey", "Epipaleolithic Turkey"))  + guides(label=FALSE)
 
 pca
 ```
