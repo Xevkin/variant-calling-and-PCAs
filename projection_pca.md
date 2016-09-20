@@ -35,13 +35,21 @@ Now drawing the pca:
 ```
 library(ggplot2)
 library(rPCA)
+
 dat<-read_evec("sample_projection_evec.txt")
+
 ifelse(grepl("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]",dat$pop, perl=TRUE), "modern", "ancient") #if necessary
+
 dat[grep("ainghazal", dat$pop),]$ancients <- "neolithic_turkey" #add appropriate label
+
 tmp <- dat[order(dat$pop),] #Sort by population, subsample 20 from each
+
 d <- by(tmp, tmp["pop"],head,n=20)
+
 reduced_dat<-Reduce(rbind, d)
+
 pca <-ggplot(data=reduced_dat, aes(x=PC1,y=PC2, color=ancients, label=pop))  + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("coral", "darkgrey", "red", "purple3", "springgreen4", "chocolate4", "sienna"))  + guides(label=FALSE)
+
 pca
 ```
 
