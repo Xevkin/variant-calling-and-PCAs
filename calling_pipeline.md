@@ -56,6 +56,7 @@ reduced_dat<-Reduce(rbind, d)
 
 pca <-ggplot(data=dat, aes(x=PC1,y=PC2, color=ancients, label=pop))  + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("coral",  "darkgrey"))  + theme(legend.position="none") #colours ancients, greys moderns
 
+pca
 ```
 OR
 ```
@@ -64,5 +65,3 @@ pca <-ggplot(data=dat, aes(x=PC1,y=PC2, color=pop, label=pop))  + geom_text(size
 pca
 
 ```
-
-dat$ancients<-ifelse(grepl("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]",dat$pop, perl=TRUE), "modern", "ancient")  
