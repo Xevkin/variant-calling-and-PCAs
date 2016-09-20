@@ -13,7 +13,8 @@
 
 #Merge homozygous samples and homozygous dataset
 
-```for i in $(ls *pileup | cut -f1 -d'.')
+```
+for i in $(ls *pileup | cut -f1 -d'.')
 do
 plink --cow --file /bowie/adaptmap/version1/adaptmapTOP-HOM-matthew-recoded-finalv1-filt2 \
 --merge $i --recode --out "$i"_merged_HOM;
