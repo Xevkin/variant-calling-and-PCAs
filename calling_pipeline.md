@@ -28,7 +28,8 @@ done
 ```
 Create inputs for smartpca
 ```
-for i in $(ls *geno0* | cut -f1 -d'.'); do cp "$i".map "$i".pedsnp; cut -f1-6 "$i".ped > "$i".pedind; done
+for i in $(ls *geno0* | cut -f1 -d'.'); do cp "$i".map "$i".pedsnp;\
+cut -f1-6 "$i".ped > "$i".pedind; done
 ```
 
 
