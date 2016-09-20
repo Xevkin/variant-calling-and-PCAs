@@ -11,7 +11,7 @@
 
 
 
-#Merge homozygous samples and homozygous dataset
+Merge homozygous samples and homozygous dataset
 
 ```
 for i in $(ls *pileup | cut -f1 -d'.')
@@ -26,3 +26,9 @@ plink --cow --file "$i"_merged_HOM --geno 0 --recode --out "$i"_merged_HOM_geno0
 
 done
 ```
+Create inputs for smartpca
+```
+for i in $(ls *geno0* | cut -f1 -d'.'); do cp "$i".map "$i".pedsnp; cut -f1-6 "$i".ped > "$i".pedind; done
+```
+
+
