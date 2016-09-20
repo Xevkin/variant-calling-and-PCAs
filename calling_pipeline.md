@@ -9,15 +9,25 @@
 
 
 
+Convert pileup file to homozygous ped file
+```
+for i in $(ls *.pileup | cut -f1 -d'.');\
+do \
+~/bin/pileupTools/pileupTools.py "$i".pileup -s $i > "$i"_HOM.log; \
+ped_hom "$i".ped > "$i"_HOM.ped; \
+done
+```
+
 
 
 Merge homozygous samples and homozygous dataset
 
 ```
-for i in $(ls *pileup | cut -f1 -d'.'); \
+for i in $(ls *.pileup | cut -f1 -d'.'); \
 do \
+cp "$i".map "$i"_HOM.map; \
 plink --cow --file /bowie/adaptmap/version1/adaptmapTOP-HOM-matthew-recoded-finalv1-filt2 \
---merge $i --recode --out "$i"_merged_HOM;\
+--merge $i"_HOM" --recode --out "$i"_merged_HOM;\
 plink --cow --file "$i"_merged_HOM --geno 0 --recode --out "$i"_merged_HOM_geno0;\
 done
 ```
