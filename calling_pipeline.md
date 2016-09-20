@@ -1,12 +1,28 @@
+See Victoria's instructions for preparing modern dataset for use.
+
 Call a high coverage sample (8X)
+```
+java -Xmx2g -jar /home/admin1/Software/GATK/GenomeAnalysisTK.jar \
+-R /kendrick/reference_genomes/goat_CHIR1_0/goat_CHIR1_0.fasta \
+-I sample.bam \
+-o sample.vcf \
+-T UnifiedGenotyper \
+-L /bowie/adaptmap/version1/adaptmapTOP-finalv1-filt2.interval_list \
+-gt_mode GENOTYPE_GIVEN_ALLELES -mbq 20 -out_mode EMIT_ALL_SITES \
+--alleles /bowie/adaptmap/version1/vcfout_header-added_reformated_16-9-2016.vcf \
+--dbsnp /bowie/adaptmap/version1/vcfout_header-added_reformated_16-9-2016.vcf
+```
 
-
-
-
-
-
-
-
+Low coverage sample - pseudohaploidize the data.
+```
+ java -Xmx4g -jar /home/admin1/Software/GATK/GenomeAnalysisTK.jar \
+-R /kendrick/reference_genomes/goat_CHIR1_0/goat_CHIR1_0.fasta \
+-T Pileup \
+-I sample.bam \
+-L /bowie/adaptmap/version1/adaptmapTOP-finalv1-filt2.interval_list
+--metadata:TABLE metatable.txt
+-o sample.pileup
+```
 
 
 
