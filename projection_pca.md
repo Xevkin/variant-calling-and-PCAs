@@ -25,4 +25,10 @@ e.g.
 ```
 grep -v "semnan*\|direkli*\|acem*\|blagotin*\|ainghazal*" populations.txt  | more > tmp; mv tmp populations.txt
 ```
+Now run the projection using the altered indiv file:
+```
+i="projection_test"
+echo -e "genotypename: $i.eigenstratgeno\nsnpname: $i.snp\nindivname: "$i"_alt.ind\nevecoutname: "$i"_projection.evec\nevaloutname: $i.eval\npoplistname: populations.txt\nnumoutlieriter: 0\nkillr2: YES\nr2thresh: 0.2\nlsqproject:  YES" > "$i"_projection.par
+smartpca -p projection_test_projection.par >> projection.log
+```
 
