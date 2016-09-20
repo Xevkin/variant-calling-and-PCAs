@@ -50,7 +50,7 @@ dat<-read_evec("sample_evec.txt")
 dat$ancients<-ifelse(grepl("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]",dat$pop, perl=TRUE), "modern", "ancient")  #assumes pops are CAP
 
 tmp <- dat[order(dat$pop),] #Sort by population, subsample 20 from each
-d <- by(tmp, tmp["pop"],n=4)
+d <- by(tmp, tmp["pop"],head,n=20)
 reduced_dat<-Reduce(rbind, d)
 
 
