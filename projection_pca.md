@@ -41,11 +41,13 @@ dat$ancients <- ifelse(grepl("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]",dat$pop, perl=TRUE),
 
 dat[grep("ainghazal", dat$pop),]$ancients <- "neolithic_turkey" #add appropriate label
 
-tmp <- dat[order(dat$pop),] #Sort by population, subsample 20 from each
-
-d <- by(tmp, tmp["pop"],head,n=20)
-
-reduced_dat<-Reduce(rbind, d)
+#subsample 20 from each population
+n<-20
+FUN <- function(x, n) {
+    if (length(x) <= n) return(x)
+    x[x %in% sample(x, n)]
+    }
+reduced_dat<-dat[unlist(lapply(split(1:nrow(dat), dat$pop), FUN, n = 20)), ]
 
 pca <-ggplot(data=reduced_dat, aes(x=PC1,y=PC2, color=ancients, label=pop))  + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("coral", "darkgrey", "red", "purple3", "springgreen4", "chocolate4", "sienna"),name="Context", breaks=c("bronze_turkey","modern","neolithic_iran","neolithic_serbia","neolithic_turkey","paleolithic_turkey"),labels=c("Bronze Age Turkey","Modern","Neolithic Iran", "Neolithic Serbia", "Neolithic Turkey", "Epipaleolithic Turkey"))  + guides(label=FALSE)
 
