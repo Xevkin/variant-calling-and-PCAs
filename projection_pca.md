@@ -37,7 +37,7 @@ library(rPCA)
 
 dat<-read_evec("sample_projection_evec.txt")
 
-ifelse(grepl("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]",dat$pop, perl=TRUE), "modern", "ancient") #if necessary
+dat$ancients <- ifelse(grepl("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]",dat$pop, perl=TRUE), "modern", "ancient") #if necessary
 
 dat[grep("ainghazal", dat$pop),]$ancients <- "neolithic_turkey" #add appropriate label
 
