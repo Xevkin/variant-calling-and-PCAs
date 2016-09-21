@@ -6,8 +6,9 @@ path_to_sample2/sample2.ped path_to_sample2/sample2.map
 Now merge with the modern dataset. Assuming we use a pseudohaploidized dataset when using pseudohaploid data:
 ```
 i="projection_test"
+dataset="/bowie/adaptmap/version1/adaptmapTOP-recoded-finalv1-filt2"
 
-plink --noweb --cow --file /bowie/adaptmap/version1/adaptmapTOP-HOM-matthew-recoded-finalv1-filt2 \
+plink --noweb --cow --file $dataset \
 --merge-list ancients.txt --recode --out $i
 
 cut -f1-6 -d" " "$i".ped > "$i".pedind
