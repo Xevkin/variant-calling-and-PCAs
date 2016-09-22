@@ -2,36 +2,43 @@ See Victoria's instructions for preparing modern dataset for use.
 
 Call a high coverage sample (8X)
 ```
+DUMMY="/bowie/adaptmap/version2/vcfout_formated_header-added.vcf"
+TABLE="/bowie/adaptmap/version2/metatable.txt"
+INTERVALS="/bowie/adaptmap/version2/ADAPTmap_updated_reduced_cleanedX0.interval_list"
+REFERENCE="/kendrick/reference_genomes/goat_CHIR1_0/goat_CHIR1_0.fasta"
+DATASET="/bowie/adaptmap/version2/ADAPTmap_updated_reduced_cleanedX0"
+
+for SAMPLE in a b c; do \
 java -Xmx2g -jar /home/admin1/Software/GATK/GenomeAnalysisTK.jar \
--R /kendrick/reference_genomes/goat_CHIR1_0/goat_CHIR1_0.fasta \
--I sample.bam \
--o sample.vcf \
+-R $REFERENCE \
+-I $SAMPLE.bam \
+-o $SAMPLE.vcf \
 -T UnifiedGenotyper \
--L /bowie/adaptmap/version1/adaptmapTOP-finalv1-filt2.interval_list \
+-L $INTERVALS \
 -gt_mode GENOTYPE_GIVEN_ALLELES -mbq 20 -out_mode EMIT_ALL_SITES \
---alleles /bowie/adaptmap/version1/vcfout_header-added_reformated_16-9-2016.vcf \
---dbsnp /bowie/adaptmap/version1/vcfout_header-added_reformated_16-9-2016.vcf
+--alleles $DUMMY \
+--dbsnp $DUMMY
 ```
 
 Low coverage sample - pseudohaploidize the data.
 ```
  java -Xmx4g -jar /home/admin1/Software/GATK/GenomeAnalysisTK.jar \
--R /kendrick/reference_genomes/goat_CHIR1_0/goat_CHIR1_0.fasta \
+-R $REFERENCE \
 -T Pileup \
--I sample.bam \
--L /bowie/adaptmap/version1/adaptmapTOP-finalv1-filt2.interval_list
---metadata:TABLE metatable.txt
--o sample.pileup
+-I $SAMPLE.bam \
+-L $INTERVALS
+--metadata:TABLE $TABLE
+-o $SAMPLE.pileup
 ```
 
 
 
 Convert pileup file to homozygous ped file
 ```
-for i in $(ls *.pileup | cut -f1 -d'.');\
+for SAMPLE in $(ls *.pileup | cut -f1 -d'.');\
 do \
-~/bin/pileupTools/pileupTools.py "$i".pileup -s $i > "$i"_HOM.log; \
-ped_hom "$i".ped > "$i"_HOM.ped; \
+~/bin/pileupTools/pileupTools.py "$SAMPLE".pileup -s $SAMPLE > "$SAMPLE"_HOM.log; \
+ped_hom "$SAMPLE".ped > "$SAMPLE"_HOM.ped; \
 done
 ```
 
@@ -40,18 +47,18 @@ done
 Merge homozygous samples and homozygous dataset
 
 ```
-for i in $(ls *.pileup | cut -f1 -d'.'); \
+for SAMPLE in $(ls *.pileup | cut -f1 -d'.'); \
 do \
-cp "$i".map "$i"_HOM.map; \
-plink --cow --file /bowie/adaptmap/version1/adaptmapTOP-HOM-matthew-recoded-finalv1-filt2 \
---merge $i"_HOM" --recode --out "$i"_merged_HOM;\
-plink --cow --file "$i"_merged_HOM --geno 0 --recode --out "$i"_merged_HOM_geno0;\
+cp "$SAMPLE".map "$SAMPLE"_HOM.map; \
+plink --cow --file $DATASET \
+--merge "$SAMPLE"_HOM --recode --out "$SAMPLE"_merged_HOM;\
+plink --cow --file "$SAMPLE"_merged_HOM --geno 0 --recode --out "$SAMPLE"_merged_HOM_geno0;\
 done
 ```
 Create inputs for smartpca
 ```
-for i in $(ls *geno0.ped | cut -f1 -d'.'); do cp "$i".map "$i".pedsnp;\
-cut -f1-6 "$i".ped > "$i".pedind;\
-echo -e "genotypename: $i.ped\nsnpname: $i.pedsnp\nindivname: $i.pedind\nevecoutname: "$i"_evec.txt\nevecoutname "$i"_ecal.txt\nkillr2: Yes\nr2thresh: 0.2\nnumchrom: 29" > "$i".par;\
-smartpca -p "$i".par > "$i"_SMARTPCA.log & done
+for SAMPLE in $(ls *geno0.ped | cut -f1 -d'.'); do cp "$SAMPLE".map "$SAMPLE".pedsnp;\
+cut -f1-6 "$SAMPLE".ped > "$SAMPLE".pedind;\
+echo -e "genotypename: $SAMPLE.ped\nsnpname: $SAMPLE.pedsnp\nindivname: $SAMPLE.pedind\nevecoutname: "$SAMPLE"_evec.txt\nevecoutname "$SAMPLE"_ecal.txt\nkillr2: Yes\nr2thresh: 0.2\nnumchrom: 29" > "$SAMPLE".par;\
+smartpca -p "$SAMPLE".par > "$SAMPLE"_SMARTPCA.log & done
 ```
