@@ -41,6 +41,13 @@ dat<-read_evec("sample_projection_evec.txt")
 dat$ancients <- ifelse(grepl("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]",dat$pop, perl=TRUE), "modern", "ancient") #if necessary
 
 dat[grep("ainghazal", dat$pop),]$ancients <- "neolithic_turkey" #add appropriate label
+dat[grep("blagotin", dat$pop),]$ancients <- "neolithic_serbia" #add appropriate label
+dat[grep("direkli", dat$pop),]$ancients <- "epipaleolithic_turkey" #add appropriate label
+dat[grep("acem", dat$pop),]$ancients <- "bronze_turkey"
+dat[grep("qazvin1", dat$pop),]$ancients <- "chalcolithic_iran"
+dat[grep("azer4", dat$pop),]$ancients <- "iron_iran"
+dat[grep("azer3", dat$pop),]$ancients <- "bronze_iran" 
+dat[grep("semnan", dat$pop),]$ancients <- "neolithic_iran"
 
 #subsample 20 from each population
 n<-20
@@ -50,7 +57,7 @@ FUN <- function(x, n) {
     }
 reduced_dat<-dat[unlist(lapply(split(1:nrow(dat), dat$pop), FUN, n = 20)), ]
 
-pca <-ggplot(data=reduced_dat, aes(x=PC1,y=PC2, color=ancients, label=pop))  + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("coral", "darkgrey", "red", "purple3", "springgreen4", "chocolate4", "sienna"),name="Context", breaks=c("bronze_turkey","modern","neolithic_iran","neolithic_serbia","neolithic_turkey","paleolithic_turkey"),labels=c("Bronze Age Turkey","Modern","Neolithic Iran", "Neolithic Serbia", "Neolithic Turkey", "Epipaleolithic Turkey"))  + guides(label=FALSE)
+pca <-ggplot(data=reduced_dat, aes(x=PC1,y=PC2, color=ancients, label=pop))  + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("purple3", "springgreen4", "chocolate4", "sienna", "orange", "darkgrey","turquoise4", "red","coral"),name="Context", breaks=c("bronze_turkey","modern","neolithic_iran","neolithic_serbia","neolithic_turkey","epipaleolithic_turkey","chalcolithic_iran", "iron_iran"),labels=c("Bronze Age Turkey","Modern","Neolithic Iran", "Neolithic Serbia", "Neolithic Turkey", "Epipaleolithic Turkey","Chalcolithic Iran", "Iron Iran"))  + guides(label=FALSE)
 
 pca
 ```
