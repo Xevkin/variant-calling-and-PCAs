@@ -2,11 +2,11 @@ See Victoria's instructions for preparing modern dataset for use.
 
 Call a high coverage sample (8X)
 ```
-DUMMY="/bowie/adaptmap/version2/vcfout_formated_header-added.vcf"
+DUMMY="/bowie/adaptmap/version2/vcfout_header-added.vcf"
 TABLE="/bowie/adaptmap/version2/metatable.txt"
-INTERVALS="/bowie/adaptmap/version2/ADAPTmap_updated_reduced_cleanedX0.interval_list"
+INTERVALS="/bowie/adaptmap/version2/ADAPTmap_updated_reduced_cleanedNX0.interval_list"
 REFERENCE="/kendrick/reference_genomes/goat_CHIR1_0/goat_CHIR1_0.fasta"
-DATASET="/bowie/adaptmap/version2/ADAPTmap_updated_reduced_cleanedX0"
+DATASET="/bowie/adaptmap/version2/ADAPTmap_updated_reduced_cleanedNX0"
 
 for SAMPLE in a b c; do \
 java -Xmx2g -jar /home/admin1/Software/GATK/GenomeAnalysisTK.jar \
