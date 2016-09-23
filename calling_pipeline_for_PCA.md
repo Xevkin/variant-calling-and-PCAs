@@ -6,7 +6,7 @@ DUMMY="/bowie/adaptmap/version2/vcfout_header-added_formated.vcf"
 TABLE="/bowie/adaptmap/version2/metatable.txt"
 INTERVALS="/bowie/adaptmap/version2/ADAPTmap_updated_reduced_cleanedNX0.interval_list"
 REFERENCE="/kendrick/reference_genomes/goat_CHIR1_0/goat_CHIR1_0.fasta"
-DATASET="/bowie/adaptmap/version2/ADAPTmap_updated_reduced_cleanedNX0"
+DATASET="/bowie/adaptmap/version2/ADAPTmap_HOM_updated_reduced_cleanedNX0"
 
 for SAMPLE in a b c; do \
 java -Xmx2g -jar /home/admin1/Software/GATK/GenomeAnalysisTK.jar \
