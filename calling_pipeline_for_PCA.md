@@ -9,6 +9,7 @@ REFERENCE="/kendrick/reference_genomes/goat_CHIR1_0/goat_CHIR1_0.fasta"
 DATASET="/bowie/adaptmap/version2/ADAPTmap_HOM_updated_reduced_cleanedNX0"
 
 for SAMPLE in a b c; do \
+samtools index $SAMPLE.bam;
 java -Xmx2g -jar /home/admin1/Software/GATK/GenomeAnalysisTK.jar \
 -R $REFERENCE \
 -I $SAMPLE.bam \
