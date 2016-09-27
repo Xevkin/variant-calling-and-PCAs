@@ -12,7 +12,6 @@ dataset="/bowie/adaptmap/version2/ADAPTmap_updated_reduced_cleanedNX0"
 plink --noweb --cow --file $dataset \
 --merge-list ancients.txt --recode --out $i
 
-cut -f1-6 -d" " "$i".ped > "$i".pedind
 cp "$i".map "$i".pedsnp
 cut -f1-6 -d" " "$i".ped > "$i".pedind
 echo -e "genotypename: $i.ped\nsnpname: $i.pedsnp\nindivname: $i.pedind\noutputformat: EIGENSTRAT\ngenooutfilename: $i.eigenstratgeno\nsnpoutfilename: $i.snp\nindoutfilename: $i.ind" > "$i".par
