@@ -48,7 +48,13 @@ dat[grep("qazvin1", dat$pop),]$ancients <- "chalcolithic_iran"
 dat[grep("azer4", dat$pop),]$ancients <- "iron_iran"
 dat[grep("azer3", dat$pop),]$ancients <- "bronze_iran" 
 dat[grep("semnan", dat$pop),]$ancients <- "neolithic_iran"
-
+dat[grep("david", dat$pop),]$ancients <- "iron_israel"
+dat[grep("kazbeg", dat$pop),]$ancients <- "medieval_georgia"
+dat[grep("fars4", dat$pop),]$ancients <- "bronze_iran"
+dat[grep("blag", dat$pop),]$ancients <- "neolithic_serbia"
+dat[grep("yoqneam", dat$pop),]$ancients <- "bronze_israel"
+dat[grep("lur12", dat$pop),]$ancients <- "neolithic_iran"
+dat[grep("pottern", dat$pop),]$ancients <- "bronze_britain"
 #subsample 20 from each population
 n<-20
 FUN <- function(x, n) {
