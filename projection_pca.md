@@ -36,11 +36,17 @@ Now drawing the pca:
 library(ggplot2)
 library(rPCA)
 
+plot_colours<- c("blue1", "blue4", "blueviolet", "brown", "brown4", "burlywood4", "cadetblue", "cadetblue4", "chocolate", "chocolate2",
++                  "chocolate4", "coral4", "cornflowerblue", "darkgoldenrod", "darkgreen", "darkorchid1", "darkorchid4", "darkred", "darkslateblue", "darkslategrey",
++                  "deeppink", "deeppink4", "deepskyblue", "deepskyblue4", "firebrick", "forestgreen", "hotpink", "hotpink4", "indianred", "indianred4",
++                  "khaki4", "mediumpurple", "mediumpurple4", "mediumseagreen", "olivedrab", "orange3", "plum4", "royalblue4", "palevioletred4", "salmon4",
++                  "saddlebrown", "sienna", "slateblue4", "turquoise4", "springgreen4", "slateblue1", "tomato", "thistle4", "violetred", "wheat4")
+
 dat<-read_evec("sample_projection_evec.txt")
 
 dat$ancients <- ifelse(grepl("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]",dat$pop, perl=TRUE), "modern", "ancient") #if necessary
 
-dat[grep("ainghazal", dat$pop),]$ancients <- "neolithic_turkey" #add appropriate label
+dat[grep("ainghazal", dat$pop),]$ancients <- "neolithic_jordan"
 dat[grep("blagotin", dat$pop),]$ancients <- "neolithic_serbia" #add appropriate label
 dat[grep("direkli", dat$pop),]$ancients <- "epipaleolithic_turkey" #add appropriate label
 dat[grep("acem", dat$pop),]$ancients <- "bronze_turkey"
@@ -62,9 +68,7 @@ FUN <- function(x, n) {
     x[x %in% sample(x, n)]
     }
 reduced_dat<-dat[unlist(lapply(split(1:nrow(dat), dat$pop), FUN, n = 20)), ]
-
-pca <-ggplot(data=reduced_dat, aes(x=PC1,y=PC2, color=ancients, label=pop))  + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("purple3", "springgreen4", "chocolate4", "sienna", "orange", "darkgrey","turquoise4", "red","coral"),name="Context", breaks=c("bronze_turkey","modern","neolithic_iran","neolithic_serbia","neolithic_turkey","epipaleolithic_turkey","chalcolithic_iran", "iron_iran"),labels=c("Bronze Age Turkey","Modern","Neolithic Iran", "Neolithic Serbia", "Neolithic Turkey", "Epipaleolithic Turkey","Chalcolithic Iran", "Iron Iran"))  + guides(label=FALSE)
-
+> pca <-ggplot(data=dat, aes(x=PC1,y=PC2, color=ancients, label=pop))  + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("purple3", "springgreen4", "chocolate4", "sienna", "orange", "indianred","turquoise4", "red", "coral","darkgrey", "burlywood4", "cadetblue", "darkorchid4", "plum4", "tomato" ),name="Context", breaks=c("modern","epipaleolithic_turkey","neolithic_iran","neolithic_serbia","neolithic_jordan","chalcolithic_iran",  "bronze_turkey", "bronze_israel", "bronze_britain","iron_iran", "iron_israel","medieval_georgia"),labels=c("Modern","Epipaleolithic Turkey","Neolithic Iran","Neolithic Serbia", "Neolithic Jordan","Chalcolithic Iran","Bronze Age Turkey",  "Bronze Age Israel", "Bronze Age Britain", "Iron Age Iran", "Iron Age Israel", "Medieval Georgia" ))  + guides(label=FALSE)
 pca
 ```
 
