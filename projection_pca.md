@@ -70,6 +70,7 @@ FUN <- function(x, n) {
 reduced_dat<-dat[unlist(lapply(split(1:nrow(dat), dat$pop), FUN, n = 20)), ]
 > pca <-ggplot(data=dat, aes(x=PC1,y=PC2, color=ancients, label=pop))  + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("purple3", "springgreen4", "chocolate4", "sienna", "orange", "indianred","turquoise4", "red", "coral","darkgrey", "burlywood4", "cadetblue", "darkorchid4", "plum4", "tomato" ),name="Context", breaks=c("modern","epipaleolithic_turkey","neolithic_iran","neolithic_serbia","neolithic_jordan","chalcolithic_iran",  "bronze_turkey", "bronze_israel", "bronze_britain","iron_iran", "iron_israel","medieval_georgia"),labels=c("Modern","Epipaleolithic Turkey","Neolithic Iran","Neolithic Serbia", "Neolithic Jordan","Chalcolithic Iran","Bronze Age Turkey",  "Bronze Age Israel", "Bronze Age Britain", "Iron Age Iran", "Iron Age Israel", "Medieval Georgia" ))  + guides(label=FALSE)
 pca
-```
+pdf("pca.pdf", width = 35, height = 35, paper="a4r")
+dev.off()
 
 ```
