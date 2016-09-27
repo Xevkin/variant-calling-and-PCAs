@@ -1,6 +1,7 @@
 Make a txt file with each ancient sample (ped and map) to be projected:
 
 path_to_sample1/sample1.ped path_to_sample1/sample1.map
+[no new line / gap]
 path_to_sample2/sample2.ped path_to_sample2/sample2.map
 
 Now merge with the modern dataset. We can use pseudohaploid data projected on a diploid dataset:
