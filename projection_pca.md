@@ -7,7 +7,7 @@ path_to_sample2/sample2.ped path_to_sample2/sample2.map
 Now merge with the modern dataset. We can use pseudohaploid data projected on a diploid dataset:
 ```
 i="projection_test"
-dataset="/bowie/adaptmap/version2/ADAPTmap_updated_reduced_cleanedNX0"
+dataset="/bowie/adaptmap/version2_of_dataset/ADAPTmap_updated_reduced_cleanedNX0"
 
 plink --noweb --cow --file $dataset \
 --merge-list ancients.txt --recode --out $i
