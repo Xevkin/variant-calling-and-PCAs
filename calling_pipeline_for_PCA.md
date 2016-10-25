@@ -27,8 +27,8 @@ Low coverage sample - pseudohaploidize the data.
 -R $REFERENCE \
 -T Pileup \
 -I $SAMPLE.bam \
--L $INTERVALS
---metadata:TABLE $TABLE
+-L $INTERVALS \
+--metadata:TABLE $TABLE \
 -o $SAMPLE.pileup
 ```
 
