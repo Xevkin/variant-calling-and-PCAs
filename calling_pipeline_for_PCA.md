@@ -5,7 +5,7 @@ Call a high coverage sample (8X)
 DUMMY="/bowie/adaptmap/version2_of_dataset/vcfout_header-added_formated.vcf"
 TABLE="/bowie/adaptmap/version2_of_dataset/metatable.txt"
 INTERVALS="/bowie/adaptmap/version2_of_dataset/ADAPTmap_updated_reduced_cleanedNX0.interval_list"
-REFERENCE="/kendrick/reference_genomes/goat_CHIR1_0/goat_CHIR1_0.fasta"
+REFERENCE="/eno/reference_genomes/goat_CHIR1_0/goat_CHIR1_0.fasta"
 DATASET="/bowie/adaptmap/version2_of_dataset/ADAPTmap_HOM_updated_reduced_cleanedNX0"
 
 for SAMPLE in a b c; do \
