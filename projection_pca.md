@@ -1,12 +1,11 @@
 Make a txt file with each ancient sample (ped and map) to be projected:
 
-path_to_sample1/sample1.ped path_to_sample1/sample1.map
-[no new line / gap]
+path_to_sample1/sample1.ped path_to_sample1/sample1.map [space seperated]
 path_to_sample2/sample2.ped path_to_sample2/sample2.map
 
 Now merge with the modern dataset. We can use pseudohaploid data projected on a diploid dataset:
 ```
-i="projection_test"
+i="merged_dataset_dec2016"
 dataset="/bowie/adaptmap/version2_of_dataset/ADAPTmap_updated_reduced_cleanedNX0"
 
 plink --noweb --cow --file $dataset \
