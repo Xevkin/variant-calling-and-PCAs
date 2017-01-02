@@ -35,11 +35,7 @@ Now drawing the pca:
 library(ggplot2)
 library(rPCA)
 
-plot_colours<- c("blue1", "blue4", "blueviolet", "brown", "brown4", "burlywood4", "cadetblue", "cadetblue4", "chocolate", "chocolate2",
-+                  "chocolate4", "coral4", "cornflowerblue", "darkgoldenrod", "darkgreen", "darkorchid1", "darkorchid4", "darkred", "darkslateblue", "darkslategrey",
-+                  "deeppink", "deeppink4", "deepskyblue", "deepskyblue4", "firebrick", "forestgreen", "hotpink", "hotpink4", "indianred", "indianred4",
-+                  "khaki4", "mediumpurple", "mediumpurple4", "mediumseagreen", "olivedrab", "orange3", "plum4", "royalblue4", "palevioletred4", "salmon4",
-+                  "saddlebrown", "sienna", "slateblue4", "turquoise4", "springgreen4", "slateblue1", "tomato", "thistle4", "violetred", "wheat4")
+plot_colours<- c("blue1", "blue4", "blueviolet", "brown", "brown4", "burlywood4", "cadetblue", "cadetblue4", "chocolate", "chocolate2", "chocolate4", "coral4", "cornflowerblue", "darkgoldenrod", "darkgreen", "darkorchid1", "darkorchid4", "darkred", "darkslateblue", "darkslategrey", "deeppink", "deeppink4", "deepskyblue", "deepskyblue4", "firebrick", "forestgreen", "hotpink", "hotpink4", "indianred", "indianred4","khaki4", "mediumpurple", "mediumpurple4", "mediumseagreen", "olivedrab", "orange3", "plum4", "royalblue4", "palevioletred4", "salmon4","saddlebrown", "sienna", "slateblue4", "turquoise4", "springgreen4", "slateblue1", "tomato", "thistle4", "violetred", "wheat4")
 
 dat<-read_evec("sample_projection_evec.txt")
 
@@ -60,6 +56,16 @@ dat[grep("blag", dat$pop),]$ancients <- "neolithic_serbia"
 dat[grep("yoqneam", dat$pop),]$ancients <- "bronze_israel"
 dat[grep("lur12", dat$pop),]$ancients <- "neolithic_iran"
 dat[grep("pottern", dat$pop),]$ancients <- "bronze_britain"
+dat[grep("monjukli8", dat$pop),]$ancients <- "neolithic_turkmen"
+dat[grep("monjukli1", dat$pop),]$ancients <- "chalcolithic_turkmen"
+dat[grep("monjukli2", dat$pop),]$ancients <- "chalcolithic_turkmen"
+dat[grep("monjukli4", dat$pop),]$ancients <- "chalcolithic_turkmen"
+dat[grep("darre", dat$pop),]$ancients <- "chalcolithic_iran"
+at[grep("hovk1", dat$pop),]$ancients <- "epipaleolithic_armenia
+dat[grep("azer5", dat$pop),]$ancients <- "bronze_iran"
+dat[grep("monjukli9", dat$pop),]$ancients <- "neolithic_turkmen"
+dat[grep("bulak", dat$pop),]$ancients <- "bronze_uzbek"
+
 #subsample 20 from each population
 n<-20
 FUN <- function(x, n) {
@@ -67,7 +73,7 @@ FUN <- function(x, n) {
     x[x %in% sample(x, n)]
     }
 reduced_dat<-dat[unlist(lapply(split(1:nrow(dat), dat$pop), FUN, n = 20)), ]
-> pca <-ggplot(data=dat, aes(x=PC1,y=PC2, color=ancients, label=pop))  + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("purple3", "springgreen4", "chocolate4", "sienna", "orange", "indianred","turquoise4", "red", "coral","darkgrey", "burlywood4", "cadetblue", "darkorchid4", "plum4", "tomato" ),name="Context", breaks=c("modern","epipaleolithic_turkey","neolithic_iran","neolithic_serbia","neolithic_jordan","chalcolithic_iran",  "bronze_turkey", "bronze_israel", "bronze_britain","iron_iran", "iron_israel","medieval_georgia"),labels=c("Modern","Epipaleolithic Turkey","Neolithic Iran","Neolithic Serbia", "Neolithic Jordan","Chalcolithic Iran","Bronze Age Turkey",  "Bronze Age Israel", "Bronze Age Britain", "Iron Age Iran", "Iron Age Israel", "Medieval Georgia" ))  + guides(label=FALSE)
+pca <-ggplot(data=reduced_dat, aes(x=PC1,y=PC2, color=ancients, label=pop)) + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("purple3", "springgreen4", "chocolate4", "sienna", "orange", "indianred","turquoise4", "red", "coral","slateblue2", "red", "cadetblue", "darkgrey", "plum4", "tomato", "springgreen4", "slateblue1", "violetred", "wheat4" ),name="Context", breaks=c("modern","epipaleolithic_armenia","epipaleolithic_turkey","neolithic_iran","neolithic_turkmen","neolithic_serbia","neolithic_jordan","chalcolithic_iran", "chalcolithic_turkmen", "bronze_turkey", "bronze_uzbek","bronze_israel", "bronze_britain","iron_iran", "iron_israel","medieval_georgia" ),labels=c("Modern","Epipaleolithic Armenia","Epipaleolithic Turkey","Neolithic Iran","Neolithic Turkmenistan","Neolithic Serbia", "Neolithic Jordan","Chalcolithic Iran","Chalcolithic Turkmenistan","Bronze Age Turkey",  "Bronze Age Uzbekistan" ,  "Bronze Age Israel", "Bronze Age Britain", "Iron Age Iran", "Iron Age Israel", "Medieval Georgia"))  + guides(label=FALSE)
 pca
 pdf("pca.pdf", width = 35, height = 35, paper="a4r")
 dev.off()
