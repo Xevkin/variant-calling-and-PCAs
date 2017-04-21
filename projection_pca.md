@@ -23,7 +23,7 @@ cut -f 1 -d" " "$i".pedind | sort -u > populations.txt ##IMTPORTANT: remove all 
 ```
 e.g.
 ```
-grep -v "yoqneam*\|pottern*\|kazbeg*\|fars*\|lur*\|azer*\|david*\|qazvin*\|azer*\|semnan*\|direkli*\|acem*\|blagotin*\|ainghazal*\|bulak*" populations.txt  | more > tmp; mv tmp populations.txt
+grep -v "yoqneam*\|pottern*\|kazbeg*\|fars*\|lur*\|azer*\|david*\|qazvin*\|azer*\|semnan*\|direkli*\|acem*\|blagotin*\|ainghazal*\|bulak*\|darre*\|hovk1*\|monjukli*" populations.txt  | more > tmp; mv tmp populations.txt
 ```
 Now run the projection using the altered indiv file:
 ```
@@ -35,7 +35,7 @@ Now drawing the pca:
 library(ggplot2)
 library(rPCA)
 
-plot_colours<- c("blue1", "blue4", "blueviolet", "brown", "brown4", "burlywood4", "cadetblue", "cadetblue4", "chocolate", "chocolate2", "chocolate4", "coral4", "cornflowerblue", "darkgoldenrod", "darkgreen", "darkorchid1", "darkorchid4", "darkred", "darkslateblue", "darkslategrey", "deeppink", "deeppink4", "deepskyblue", "deepskyblue4", "firebrick", "forestgreen", "hotpink", "hotpink4", "indianred", "indianred4","khaki4", "mediumpurple", "mediumpurple4", "mediumseagreen", "olivedrab", "orange3", "plum4", "royalblue4", "palevioletred4", "salmon4","saddlebrown", "sienna", "slateblue4", "turquoise4", "springgreen4", "slateblue1", "tomato", "thistle4", "violetred", "wheat4")
+plot_colours<- c("blue1", "blue4", "blueviolet", "brown", "brown4", "burlywood4", "cadetblue", "cadetblue4", "chocolate", "chocolate2", "chocolate4", "coral4", "cornflowerblue", "darkgoldenrod", "darkgreen", "darkorchid1", "darkorchid4", "darkred", "darkslateblue", "darkslategrey", "deeppink", "deeppink4", "deepskyblue", "deepskyblue4", "firebrick", "forestgreen", "hotpink", "hotpink4", "indianred", "indianred4","khaki4", "mediumpurple", "mediumpurple4", "mediumseagreen", "olivedrab", "orange3", "plum4", "royalblue4", "palevioletred4", "salmon4","saddlebrown", "sienna", "slateblue4", "turquoise4", "springgreen4", "slateblue1", "tomato", "thistle4", "violetred", "wheat4", "yellow,")
 
 dat<-read_evec("sample_projection_evec.txt")
 
@@ -47,7 +47,7 @@ dat[grep("direkli", dat$pop),]$ancients <- "epipaleolithic_turkey" #add appropri
 dat[grep("acem", dat$pop),]$ancients <- "bronze_turkey"
 dat[grep("qazvin1", dat$pop),]$ancients <- "chalcolithic_iran"
 dat[grep("azer4", dat$pop),]$ancients <- "iron_iran"
-dat[grep("azer3", dat$pop),]$ancients <- "bronze_iran" 
+dat[grep("azer3-5", dat$pop),]$ancients <- "bronze_iran" 
 dat[grep("semnan", dat$pop),]$ancients <- "neolithic_iran"
 dat[grep("david", dat$pop),]$ancients <- "iron_israel"
 dat[grep("kazbeg", dat$pop),]$ancients <- "medieval_georgia"
@@ -62,14 +62,16 @@ dat[grep("monjukli2", dat$pop),]$ancients <- "chalcolithic_turkmen"
 dat[grep("monjukli4", dat$pop),]$ancients <- "chalcolithic_turkmen"
 dat[grep("darre", dat$pop),]$ancients <- "chalcolithic_iran"
 dat[grep("hovk1", dat$pop),]$ancients <- "epipaleolithic_armenia"
-dat[grep("azer5", dat$pop),]$ancients <- "bronze_iran"
-dat[grep("monjukli9", dat$pop),]$ancients <- "neolithic_turkmen"
 dat[grep("bulak", dat$pop),]$ancients <- "bronze_uzbek"
+dat[grep("IOG", dat$pop),]$ancients <- "modern_ireland"
+dat[grep("Tog", dat$pop),]$ancients <- "modern_toga"
+
+
 
 #subsample 20 from each population
 n<-20
 FUN <- function(x, n) {
-    if (length(x) <= n) return(x)
+    if (length(x) <= n) return(x)m
     x[x %in% sample(x, n)]
     }
 reduced_dat<-dat[unlist(lapply(split(1:nrow(dat), dat$pop), FUN, n = 20)), ]
