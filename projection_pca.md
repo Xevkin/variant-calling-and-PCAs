@@ -61,7 +61,7 @@ dat[grep("monjukli1", dat$pop),]$ancients <- "chalcolithic_turkmen"
 dat[grep("monjukli2", dat$pop),]$ancients <- "chalcolithic_turkmen"
 dat[grep("monjukli4", dat$pop),]$ancients <- "chalcolithic_turkmen"
 dat[grep("darre", dat$pop),]$ancients <- "chalcolithic_iran"
-at[grep("hovk1", dat$pop),]$ancients <- "epipaleolithic_armenia
+dat[grep("hovk1", dat$pop),]$ancients <- "epipaleolithic_armenia"
 dat[grep("azer5", dat$pop),]$ancients <- "bronze_iran"
 dat[grep("monjukli9", dat$pop),]$ancients <- "neolithic_turkmen"
 dat[grep("bulak", dat$pop),]$ancients <- "bronze_uzbek"
