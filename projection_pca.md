@@ -23,7 +23,7 @@ cut -f 1 -d" " "$i".pedind | sort -u > populations.txt ##IMTPORTANT: remove all 
 ```
 e.g.
 ```
-grep -v "yoqneam*\|pottern*\|kazbeg*\|fars*\|lur*\|azer*\|david*\|qazvin*\|azer*\|semnan*\|direkli*\|acem*\|blagotin*\|ainghazal*\|bulak*\|darre*\|hovk1*\|monjukli*" populations.txt  | more > tmp; mv tmp populations.txt
+grep -v "yoqneam*\|pottern*\|kazbeg*\|fars*\|lur*\|azer*\|david*\|qazvin*\|azer*\|semnan*\|direkli*\|acem*\|blagotin*\|ainghazal*\|bulak*\|darre*\|hovk1*\|monjukli*\|AP45*\|AP49*\|geor*\|ghosh*\|chalow*\|gilat*\|kohneh*\|Kov5*\|miqne*\|safi*\|shiqmim*\|Tac3*" populations.txt  | more > tmp; mv tmp populations.txt
 ```
 Now run the projection using the altered indiv file:
 ```
