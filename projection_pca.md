@@ -48,13 +48,16 @@ dat[grep("acem", dat$pop),]$ancients <- "bronze_turkey"
 dat[grep("qazvin1", dat$pop),]$ancients <- "chalcolithic_iran"
 dat[grep("azer4", dat$pop),]$ancients <- "iron_iran"
 dat[grep("azer3-5", dat$pop),]$ancients <- "bronze_iran" 
+dat[grep("azer6", dat$pop),]$ancients <- "chalcolithic_iran" 
 dat[grep("semnan", dat$pop),]$ancients <- "neolithic_iran"
 dat[grep("david", dat$pop),]$ancients <- "iron_israel"
 dat[grep("kazbeg", dat$pop),]$ancients <- "medieval_georgia"
-dat[grep("fars4", dat$pop),]$ancients <- "bronze_iran"
+dat[grep("geor", dat$pop),]$ancients <- "medieval_georgia"
+dat[grep("fars4", dat$pop),]$ancients <- "chalcolithic_iran"
+dat[grep("fars1", dat$pop),]$ancients <- "chalcolithic_iran"
 dat[grep("blag", dat$pop),]$ancients <- "neolithic_serbia"
 dat[grep("yoqneam", dat$pop),]$ancients <- "bronze_israel"
-dat[grep("lur12", dat$pop),]$ancients <- "neolithic_iran"
+dat[grep("lur", dat$pop),]$ancients <- "neolithic_iran"
 dat[grep("pottern", dat$pop),]$ancients <- "bronze_britain"
 dat[grep("monjukli8", dat$pop),]$ancients <- "neolithic_turkmen"
 dat[grep("monjukli1", dat$pop),]$ancients <- "chalcolithic_turkmen"
@@ -65,17 +68,25 @@ dat[grep("hovk1", dat$pop),]$ancients <- "epipaleolithic_armenia"
 dat[grep("bulak", dat$pop),]$ancients <- "bronze_uzbek"
 dat[grep("IOG", dat$pop),]$ancients <- "modern_ireland"
 dat[grep("Tog", dat$pop),]$ancients <- "modern_toga"
-
-
+dat[grep("gilat", dat$pop),]$ancients <- "chal_israel" 
+dat[grep("safi", dat$pop),]$ancients <- "bronze_israel"
+dat[grep("miqne", dat$pop),]$ancients <- "iron_israel"
+dat[grep("Tac3", dat$pop),]$ancients <- "bronze_georgia" 
+dat[grep("shiqmim", dat$pop),]$ancients <- "chal_israel"
+dat[grep("kohneh", dat$pop),]$ancients <- "bronze_iran"
+dat[grep("chalow", dat$pop),]$ancients <- "bronze_iran"
+dat[grep("AP4", dat$pop),]$ancients <- "neolithic_turkey" 
+dat[grep("fars2-5", dat$pop),]$ancients <- "neolithic_iran" 
+dat[grep("yarmut", dat$pop),]$ancients <- "bronze_israel"
 
 #subsample 20 from each population
 n<-20
 FUN <- function(x, n) {
-    if (length(x) <= n) return(x)m
+    if (length(x) <= n) return(x)
     x[x %in% sample(x, n)]
     }
 reduced_dat<-dat[unlist(lapply(split(1:nrow(dat), dat$pop), FUN, n = 20)), ]
-pca <-ggplot(data=reduced_dat, aes(x=PC1,y=PC2, color=ancients, label=pop)) + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("purple3", "springgreen4", "chocolate4", "sienna", "orange", "indianred","turquoise4", "red", "coral","slateblue2", "red", "cadetblue", "darkgrey", "plum4", "tomato", "springgreen4", "slateblue1", "violetred", "wheat4", "yellow2", "springgreen1"),name="Context", breaks=c("modern","epipaleolithic_armenia","epipaleolithic_turkey","neolithic_iran","neolithic_turkmen","neolithic_serbia","neolithic_jordan","chalcolithic_iran", "chalcolithic_turkmen", "bronze_turkey", "bronze_uzbek","bronze_israel", "bronze_britain","iron_iran", "iron_israel","medieval_georgia","modern_ireland","modern_toga" ),labels=c("Modern","Epipaleolithic Armenia","Epipaleolithic Turkey","Neolithic Iran","Neolithic Turkmenistan","Neolithic Serbia", "Neolithic Jordan","Chalcolithic Iran","Chalcolithic Turkmenistan","Bronze Age Turkey",  "Bronze Age Uzbekistan" ,  "Bronze Age Israel", "Bronze Age Britain", "Iron Age Iran", "Iron Age Israel", "Medieval Georgia","Modern Ireland", "Modern Toga"))  + guides(label=FALSE)
+pca <-ggplot(data=reduced_dat, aes(x=PC1,y=PC2, color=ancients, label=pop)) + geom_text(size=2,alpha=0.8) + theme_bw()  + scale_colour_manual(values=c("purple3", "springgreen4", "chocolate4", "sienna", "orange", "indianred","turquoise4", "red", "coral","slateblue2", "red", "cadetblue", "darkgrey", "plum4", "tomato", "springgreen4", "slateblue1", "violetred", "wheat4", "yellow2", "springgreen1", "orange", "plum8" , "slateblue4", "springgreen7", "yellow5"),name="Context", breaks=c("modern","epipaleolithic_armenia","epipaleolithic_turkey","neolithic_iran","neolithic_turkmen","neolithic_turkey","neolithic_serbia","neolithic_jordan","chalcolithic_iran", "chalcolithic_turkmen","chalcolithic_israel","bronze_iran","bronze_georgia","bronze_turkey", "bronze_uzbek","bronze_israel", "bronze_britain","iron_iran", "iron_israel","medieval_georgia","modern_ireland","modern_toga" ),labels=c("Modern","Epipaleolithic Armenia","Epipaleolithic Turkey","Neolithic Iran","Neolithic Turkmenistan","Neolithic Turkey","Neolithic Serbia", "Neolithic Jordan","Chalcolithic Iran","Chalcolithic Turkmenistan","Chalcolithic Israel","Bronze Iran","Bronze Georgia","Bronze Age Turkey",  "Bronze Age Uzbekistan" ,  "Bronze Age Israel", "Bronze Age Britain", "Iron Age Iran", "Iron Age Israel", "Medieval Georgia","Modern Ireland", "Modern Toga"))  + guides(label=FALSE)
 pca
 pdf("pca.pdf", width = 35, height = 35, paper="a4r")
 dev.off()
