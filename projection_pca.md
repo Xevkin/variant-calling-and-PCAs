@@ -13,7 +13,7 @@ plink --noweb --cow --file $dataset \
 
 cp "$i".map "$i".pedsnp
 cut -f1-6 -d" " "$i".ped > "$i".pedind
-echo -e "genotypename: $i.ped\nsnpname: $i.pedsnp\nindivname: $i.pedind\noutputformat: EIGENSTRAT\ngenooutfilename: $i.eigenstratgeno\nsnpoutfilename: $i.snp\nindoutfilename: $i.ind\nnumchrom: 29\nOutliermode: 2" > "$i".par
+echo -e "genotypename: $i.ped\nsnpname: $i.pedsnp\nindivname: $i.pedind\noutputformat: EIGENSTRAT\ngenooutfilename: $i.eigenstratgeno\nsnpoutfilename: $i.snp\nindoutfilename: $i.ind\nnumchrom: 29\noutliermode: 2" > "$i".par
 
 smartpca convertf -p "$i".par > conversion.log #now convert to eigenstrat format
 cut -f 1 -d':' "$i".ind > file.pop
