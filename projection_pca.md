@@ -27,8 +27,7 @@ grep -v "yoqneam*\|pottern*\|kazbeg*\|fars*\|lur*\|azer*\|david*\|qazvin*\|azer*
 ```
 Now run the projection using the altered indiv file:
 ```
-echo -e "genotypename: $i.eigenstratgeno\nsnpname: $i.snp\nindivname: "$i"_alt.ind\nevecoutname: "$i"_projection.evec\nevaloutname: $i.eval\npoplistname: populations.txt\nnumoutlieriter: 0\nkillr2: YES\nr2thresh: 0.2\nlsqproject:  YES\nchrom: 29\n
-shrinkmode: YES" > "$i"_projection.par
+echo -e "genotypename: $i.eigenstratgeno\nsnpname: $i.snp\nindivname: "$i"_alt.ind\nevecoutname: "$i"_projection.evec\nevaloutname: $i.eval\npoplistname: populations.txt\nnumoutlieriter: 0\nkillr2: YES\nr2thresh: 0.2\nlsqproject:  YES\nchrom: 29\nshrinkmode: YES" > "$i"_projection.par
 smartpca -p "$i"_projection.par >> projection.log
 ```
 Now drawing the pca:
